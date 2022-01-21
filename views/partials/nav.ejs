@@ -1,0 +1,16 @@
+<nav>
+  <div class="site-title">
+    <a href="/"><h1>Blogger-M</h1></a>
+  </div>
+  <ul>
+    <li><a href="/">Blogs</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/blog/create">New Blog</a></li>
+    <% if (user) { %>
+    <li><a href="/user/logout">logout</a></li>
+    <% } else { %>
+    <li><a href="/user/login">Login</a></li>
+    <li><a href="/user/signup">Sign-up</a></li>
+    <% } %>
+  </ul>
+</nav>

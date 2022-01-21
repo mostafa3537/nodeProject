@@ -1,0 +1,28 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+
+  <div class="create-blog content">
+    <form action="/blog" method="POST">
+      <label for="title">Blog title:</label>
+      <input type="text" id="title" name="title" required>
+
+      <label for="body">Blog body:</label>
+      <textarea id="body" name="body" required></textarea>
+
+      <label for="tages">Blog tages:</label>
+      <input type="text" id="tages" name="tages" required>
+
+
+      <input type="text" id="tages" name="photo" placeholder="enter photo's link" required>
+
+      <button>Submit</button>
+    </form>
+  </div>
+
+
+  <%- include("./partials/footer.ejs") %>
+</body>
+</html>

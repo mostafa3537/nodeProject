@@ -1,0 +1,74 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<div class="site-title">
+  <div><h1>Blogger-M</h1></div>
+</div>
+
+<form action="/signup">
+  <h2>Sign up</h2>
+  <label for="userName">userName:</label>
+  <input type="text" name="userName" required />
+  <!-- <div class="email error"></div> -->
+  <label for="email">Email:</label>
+  <input type="text" name="email" required />
+  <div class="email error"></div>
+  <label for="password">Password:</label>
+  <input type="password" name="password" required />
+  <div class="password error"></div>
+  <label for="confirmPassword">Confirm Password:</label>
+  <input type="password" name="confirmPassword" required />
+  <div class="password error"></div>
+  <button>Sign up</button>
+</form>
+<footer>
+  <a href="/user/login">or login</a>
+</footer>
+
+<%- include("./partials/footer.ejs") %>
+
+
+<script>
+  const form = document.querySelector('form');
+  const emailError = document.querySelector('.email.error');
+  const passwordError = document.querySelector('.password.error');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // reset errors
+    emailError.textContent = '';
+    passwordError.textContent = '';
+
+    // get values
+    const userName = form.userName.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
+
+    try {
+      const res = await fetch('/user/signup', { 
+        method: 'POST', 
+        body: JSON.stringify({userName, email, password ,confirmPassword}),
+        headers: {'Content-Type': 'application/json'}
+      });
+      console.log(res);
+      console.log(res.status);
+      // const data = await res.json();
+      // console.log(data);
+      // if (data.errors) {
+      //   emailError.textContent = data.errors.email;
+      //   passwordError.textContent = data.errors.password;
+
+      // }
+      if (res.status===200) {
+        location.assign('/');
+      }
+
+    }
+    catch (err) {
+      console.log(err);
+    }
+
+  });
+</script>

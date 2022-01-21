@@ -1,0 +1,50 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+
+  <div class="blogs content">
+    <h2>All Blogs</h2>
+
+    <% if (blogs.length > 0) { %>
+      <% blogs.forEach(blog => { %>
+        <a class="single" href="/blogs/<%= blog._id %>">
+          <h3 class="title"><%= blog.title %></h3>
+          <h3 style="display: none;" id="id"><%= blog._id %></h3>
+          <p class="snippet"><%= blog.body %></p>
+          <p class="snippet">Tages: <%= blog.tages %></p>
+          <p class="snippet">Created by: <%= blog.auther %></p>
+          <img src="<%= blog.photo %>" width="300px">
+          <button id="delete" type="button" ">Delete</button>
+
+        </a>
+      <% }) %>
+    <% } else { %>
+      <p>There are no blogs to display...</p>
+    <% } %>
+  </div>
+
+<script>
+  const del = document.getElementById('delete')
+
+  del.addEventListener('click',async(e) => {
+    e.preventDefault();
+    console.log('delete');
+    const id = document.getElementById('id').innerText
+
+    fetch(`/blog/${id}`, { 
+      method: 'DELETE',   
+    });
+    location.assign('/');
+
+  })
+
+</script>
+ 
+
+
+  <%- include("./partials/footer.ejs") %>
+  
+</body>
+</html>
